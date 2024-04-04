@@ -43,20 +43,25 @@ class SpellChecker:
                 return paroleErrate, t2 - t1
             case _:
                 return None
+    
+    
+    def handleButton(self, e):
+        print("button pressed")
+        self._view._lvOut.controls.clear()
+        language = self._view._txtLanguage.value
+        modality = self._view._txtModality.value
+        sentence = self._view._txtSentence.value
+        self._view._lvOut.controls.append(
+            ft.Text(f"{language} : {sentence, modality}")
+        )
+        self._view._txtLanguage.value = ''
+        self._view._txtModality.value = ''
+        self._view._txtSentence.value = ''
+        self._view.update()
+
 
 def replaceChars(text):
     chars = "\\`*_{}[]()>#+-.!$?%^;,=_~"
     for c in chars:
         text = text.replace(c, "")
     return text
-
-    # def printMenu(self):
-    #     print("______________________________\n" +
-    #           "      SpellChecker 101\n"+
-    #           "______________________________\n " +
-    #           "Seleziona la lingua desiderata\n"
-    #           "1. Italiano\n" +
-    #           "2. Inglese\n" +
-    #           "3. Spagnolo\n" +
-    #           "4. Exit\n" +
-    #           "______________________________\n")

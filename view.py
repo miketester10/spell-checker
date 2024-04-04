@@ -1,10 +1,12 @@
 import flet as ft
 
-class View(object):
+class View:
     def __init__(self, page: ft.Page):
         # Page
         self.page = page
-        self.page.title = "TdP 2024 - Lab 04 - SpellChecker ++"
+        self.page.window_height = 600
+        self.page.window_width = 850
+        self.page.title = "SpellChecker"
         self.page.horizontal_alignment = 'CENTER'
         self.page.theme_mode = ft.ThemeMode.LIGHT
         # Controller
@@ -26,21 +28,37 @@ class View(object):
                    alignment=ft.MainAxisAlignment.START)
         )
 
-        # Riga 1
-        txtLanguage = ft.Dropdown(
-            label="Select language",
-            width=600,
+        # Row 1
+        self._txtLanguage = ft.Dropdown(
+            label="Select Language",
+            width=800,
             options=[
                 ft.dropdown.Option("italian"),
                 ft.dropdown.Option("english"),
                 ft.dropdown.Option("spanish"), 
             ]  
         )
-        row1 = ft.Row([txtLanguage])
+        __row1 = ft.Row([self._txtLanguage], alignment=ft.MainAxisAlignment.START)
         
-
+        # Row 2
+        self._txtModality = ft.Dropdown(
+            label="Search Modality",
+            width=200,
+            options=[
+                ft.dropdown.Option("Default"),
+                ft.dropdown.Option("Linear"),
+                ft.dropdown.Option("Dichotomic"), 
+            ]  
+        )
+        self._txtSentence = ft.TextField(label="Add your sentence here", width=460) 
+        __btn = ft.ElevatedButton("Spell Check", on_click=self.__controller.handleButton)                       
+        __row2 = ft.Row([self._txtModality, self._txtSentence, __btn], alignment=ft.MainAxisAlignment.START)
         
-        self.page.add(row1)
+        # Row 3
+        self._lvOut = ft.ListView()
+        __row3 = ft.Row([self._lvOut], alignment=ft.MainAxisAlignment.START)
+        
+        self.page.add(__row1, __row2, __row3)
         self.page.update()
 
     def update(self):
