@@ -24,7 +24,7 @@ class View:
         self.__title = ft.Text("SpellChecker", size=24, color="blue")
         self.__theme_switch = ft.Switch(label="Light theme", on_change=self.theme_changed)
         self.page.add(
-            ft.Row(spacing=30, controls=[self.__theme_switch, self.__title, ],
+            ft.Row(spacing=220, controls=[self.__theme_switch, self.__title, ],
                    alignment=ft.MainAxisAlignment.START)
         )
 
@@ -38,7 +38,7 @@ class View:
                 ft.dropdown.Option("spanish"), 
             ]  
         )
-        __row1 = ft.Row([self._txtLanguage], alignment=ft.MainAxisAlignment.START)
+        row1 = ft.Row([self._txtLanguage], alignment=ft.MainAxisAlignment.START)
         
         # Row 2
         self._txtModality = ft.Dropdown(
@@ -51,14 +51,14 @@ class View:
             ]  
         )
         self._txtSentence = ft.TextField(label="Add your sentence here", width=460) 
-        __btn = ft.ElevatedButton("Spell Check", on_click=self.__controller.handleSentence)                       
-        __row2 = ft.Row([self._txtModality, self._txtSentence, __btn], alignment=ft.MainAxisAlignment.START)
+        btn = ft.ElevatedButton("Spell Check", on_click=self.__controller.handleSentence)                       
+        row2 = ft.Row([self._txtModality, self._txtSentence, btn], alignment=ft.MainAxisAlignment.START)
         
         # Row 3
         self._lvOut = ft.ListView()
-        __row3 = ft.Row([self._lvOut], alignment=ft.MainAxisAlignment.START)
+        row3 = ft.Row([self._lvOut], alignment=ft.MainAxisAlignment.START)
         
-        self.page.add(__row1, __row2, __row3)
+        self.page.add(row1, row2, row3)
         self.page.update()
 
     def createListView(self, paroleErrate, tempoRichiesto):
