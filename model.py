@@ -19,8 +19,6 @@ class MultiDictionary:
             self._italian.printAll()
         elif language == "spanish":
             self._spanish.printAll()
-        else:
-            print("Language not supported")
 
     def searchWord(self, words, language):
         # words is a list of strings

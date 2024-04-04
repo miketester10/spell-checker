@@ -51,7 +51,7 @@ class View:
             ]  
         )
         self._txtSentence = ft.TextField(label="Add your sentence here", width=460) 
-        __btn = ft.ElevatedButton("Spell Check", on_click=self.__controller.handleButton)                       
+        __btn = ft.ElevatedButton("Spell Check", on_click=self.__controller.handleSentence)                       
         __row2 = ft.Row([self._txtModality, self._txtSentence, __btn], alignment=ft.MainAxisAlignment.START)
         
         # Row 3
@@ -61,10 +61,22 @@ class View:
         self.page.add(__row1, __row2, __row3)
         self.page.update()
 
+    def createListView(self, paroleErrate, tempoRichiesto):
+        self._lvOut.controls.clear()
+        self._lvOut.controls.append(ft.Text(f'Frase inserita: {self._txtSentence.value}'))
+        self._lvOut.controls.append(ft.Text(f'{paroleErrate}'))
+        self._lvOut.controls.append(ft.Text(f'Tempo richiesto dalla ricerca: {tempoRichiesto} secondi'))
+        self._txtLanguage.value = ''
+        self._txtModality.value = ''
+        self._txtSentence.value = ''
+        self.update()
+
     def update(self):
         self.page.update()
+
     def setController(self, controller):
         self.__controller = controller
+
     def theme_changed(self, e):
         """Function that changes the color theme of the app, when the corresponding
         switch is triggered"""
